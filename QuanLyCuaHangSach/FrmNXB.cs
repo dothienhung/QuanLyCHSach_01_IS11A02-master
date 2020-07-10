@@ -19,18 +19,16 @@ namespace QuanLyCuaHangSach
             InitializeComponent();
         }
         private void FrmNXB_Load(object sender, EventArgs e)
-        {
-            DAO.OpenConnection();
-            LoadDataToGrivew();
-            DAO.CloseConnetion();
+        {        
+            LoadDataToGrivew();         
         }
         private void LoadDataToGrivew()
         {
-            DAO.OpenConnection();
+           
             string sql = "SELECT * FROM NhaXuatBan";
             NXB = DAO.GetDataToTable(sql);
             dataGridView1.DataSource = NXB;
-            DAO.CloseConnetion();
+          
         }
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
@@ -72,7 +70,7 @@ namespace QuanLyCuaHangSach
                 return;
             }
             string sql = "SELECT MaNXB, TenNXB, DiaChi, DienThoai FROM NhaXuatBan WHERE MaNXB = '" + txtma.Text + "'";
-            DAO.OpenConnection();
+          
             if (DAO.checkKeyExit(sql))
             {
                 MessageBox.Show("Mã NXB này đã tồn tại, bạn phải nhập mã khác", "Thông báo",
@@ -83,12 +81,12 @@ namespace QuanLyCuaHangSach
             }
             sql = "INSERT INTO NhaXuatBan (MaNXB, TenNXB, DiaChi, DienThoai) VALUES ('" + txtma.Text + "', N'" + txtNXB.Text + "', N'" + txtdiachi.Text + "', '" + txtsdt.Text + "')";
             DAO.RunSql(sql);
-            DAO.CloseConnetion();
+          
             LoadDataToGrivew();
         }
         private void btnsua_Click_1(object sender, EventArgs e)
         {
-            DAO.OpenConnection();
+          
             string sql;
             if (NXB.Rows.Count == 0)
             {
@@ -104,12 +102,12 @@ namespace QuanLyCuaHangSach
             }
             sql = "UPDATE NhaXuatBan SET TenNXB = N'" + txtNXB.Text.Trim() + "', DiaChi = N'" + txtdiachi.Text + "', DienThoai = '" + txtsdt.Text + "' WHERE MaNXB = '" + txtma.Text + "'";
             DAO.RunSql(sql);
-            DAO.CloseConnetion();
+            
             LoadDataToGrivew();
         }
         private void btnxoa_Click_1(object sender, EventArgs e)
         {
-            DAO.OpenConnection();
+            
             string sql;
             if (NXB.Rows.Count == 0)
             {
@@ -128,7 +126,7 @@ namespace QuanLyCuaHangSach
             {
                 sql = "DELETE FROM NhaXuatBan WHERE MaNXB = '" + txtma.Text + "'";
                 DAO.RunSql(sql);
-                DAO.CloseConnetion();
+                
                 LoadDataToGrivew();
             }
         }
@@ -166,7 +164,7 @@ namespace QuanLyCuaHangSach
 
         private void FrmNXB_Load_1(object sender, EventArgs e)
         {
-
+            LoadDataToGrivew();
         }
     }
 }
