@@ -198,8 +198,7 @@ namespace QuanLyCuaHangSach
             DAO.RunSql(sql);
             sql = "UPDATE KhoSach SET DonGiaNhap =" + txtdg.Text + " WHERE MaSach= N'" + cboms.SelectedValue + "'";
             DAO.RunSql(sql);
-            tx = Convert.ToDouble(txtdg.Text) * 110 / 100;
-            txtdg.Text = tx.ToString();
+            tx = Convert.ToDouble(txtdg.Text) * 110 / 100;        
             sql = "UPDATE KhoSach SET DonGiaBan = '" + tx + "' WHERE MaSach = '" + cboms.Text + "'";
             DAO.RunSql(sql);
             // Cập nhật lại tổng tiền cho hóa đơn nhap
@@ -209,6 +208,8 @@ namespace QuanLyCuaHangSach
             DAO.RunSql(sql);
             txttongtien.Text = Tongmoi.ToString();
             txtbc.Text =  DAO.ChuyenSoSangChu(Tongmoi.ToString());
+            txttongtien.Enabled = false;
+            txtbc.Enabled = false;
             ResetValuesHang();
             Load_DataGridViewChitiet();
             btnXoa.Enabled = true;
@@ -520,6 +521,7 @@ namespace QuanLyCuaHangSach
                 dg = Convert.ToDouble(txtdg.Text);
             tt = sl * dg - sl * dg * gg / 100;
             txtthanhtien.Text = tt.ToString();
+          
         }
     }
 }
